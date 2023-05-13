@@ -1,0 +1,65 @@
+.container{
+   align-items: center;
+   display: flex;
+   font-weight: bold;
+   width: 560px;
+   justify-content: space-between;
+}
+
+.informacoes{
+   align-items: center;
+   background-color: #f1eaea;
+   border-color: #416075;
+   border-radius: 10px;
+   border-style: solid;
+   display: flex;
+   height: 12vh;
+   justify-content: space-between;
+   text-align: center;
+   width: 470px;
+}
+
+.icone {
+   height: 8vh;
+}
+
+.sala{
+   border-right: solid #416075;
+   width: 5vw;
+}
+
+.atendimento{
+   text-align: left;
+   width: calc(94% - 5vw);
+}
+
+.informacoes h3 {
+   font-size: 3rem;
+   font-weight: 600;
+}
+
+.informacoes h4{
+   font-size: 1.6rem;
+   font-weight: 600;
+   padding-bottom: .3rem;
+}
+
+.informacoes h5{
+   font-size: 1.1rem;
+   padding-left: .3rem;
+   width: 98%;
+}
+
+.informacoes p{
+   font-size: 1.2rem;
+}
+
+.medico{
+   align-items: center;
+   display: flex;
+   justify-content: space-between;
+}
+
+.iconeMedico{
+   height: 4vh;
+}
