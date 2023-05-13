@@ -3,11 +3,11 @@ import styles from './Card.module.css';
 import icone from '../../assets/img/chamado.png';
 import medico from '../../assets/img/doc.png';
 
-export default function Card({ nomeMedico, nomePaciente, numeroSala }) {
+export default function Card({ isLastChild, nomeMedico, nomePaciente, numeroSala }) {
    return (
       <div className={styles.container}>
          <img className={styles.icone} src={icone} />
-         <div className={styles.informacoes}>
+         <div className={isLastChild ? `${styles.informacoes} ${styles.chamado}` : `${styles.informacoes}`}>
             <div className={styles.sala}>
                <p>Sala:</p>
                <h3>{numeroSala}</h3>
