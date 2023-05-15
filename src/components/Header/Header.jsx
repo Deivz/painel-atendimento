@@ -8,18 +8,16 @@ import hospital from '../../assets/img/hospital.png';
 export default function Header() {
    return (
       <header className={styles.header}>
-         <div className={styles.container}>
-            <h1><img className={styles.logo} src={logo} /></h1>
-            <div className={styles.textoCentral}>
-               <h2 className={styles.titulo}>PAINEL DE ATENDIMENTO</h2>
-               <div className={styles.ups}>
-                  <img className={styles.icone} src={hospital} />
-                  <h3 className={styles.texto}>POLICLÍNICA MUNICIPAL DE PORTO SEGURO</h3>
-               </div>
+         <h1><img className={styles.logo} src={logo} /></h1>
+         <div className={styles.textoCentral}>
+            <h2 className={styles.titulo}>PAINEL DE ATENDIMENTO</h2>
+            <div className={styles.ups}>
+               <img className={styles.icone} src={hospital} />
+               <h3 className={styles.texto}>POLICLÍNICA MUNICIPAL DE PORTO SEGURO</h3>
             </div>
-            <DateCard />
-            {/* <h2 className={styles.texto}>SISTEMA DE GESTÃO DE ATENDIMENTO/PRONTUÁRIO</h2> */}
          </div>
+         <DateCard />
+         {/* <h2 className={styles.texto}>SISTEMA DE GESTÃO DE ATENDIMENTO/PRONTUÁRIO</h2> */}
       </header>
    )
 }

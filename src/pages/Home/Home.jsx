@@ -15,11 +15,9 @@ export default function Home() {
       audio.play()
    }
 
-   let tamanhoAtual = 0;
-
    useEffect(() => {
       const interval = setInterval(() => {
-         setAtendimentos(atendimento);
+         setAtendimentos(atendimento.reverse());
       }, 1000);
 
       return () => clearInterval(interval);
@@ -30,8 +28,8 @@ export default function Home() {
 
 
    useEffect(() => {
-      if(atendimento.length > atendimentosMemoizado.length){
-         tocarSom();
+      if (atendimento.length > atendimentosMemoizado.length) {
+         document.getElementById('audio').click();
       }
 
    }, [atendimentosMemoizado]);
@@ -43,6 +41,7 @@ export default function Home() {
                <div className={styles.conteudo}>
                   <Header />
                   <div className={styles.cards}>
+                     <audio muted hidden id='audio' onClick={tocarSom} autoPlay />
                      {
                         Object.values(atendimentosMemoizado).map((atendimento, index) => {
                            return <Card
@@ -50,7 +49,7 @@ export default function Home() {
                               nomeMedico={atendimento.profissional}
                               nomePaciente={atendimento.nome}
                               numeroSala={atendimento.sala}
-                              isLastChild={index === atendimentos.length - 1 ? true : false}
+                              isFirstChild={index === 0 ? true : false}
                            />
                         })
                      }

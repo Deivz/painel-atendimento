@@ -34,8 +34,8 @@ export default function DateCard() {
          <div className={styles.dateCard}>
             <img className={styles.calendario} src={calendar} alt='Ícone do calendário' />
             <div>
-               <p>Data: {dataMemoizada}</p>
-               <p>Hora: {horaMemoizada}</p>
+               <p>{dataMemoizada}</p>
+               <p>{horaMemoizada}</p>
             </div>
          </div>
       </div>

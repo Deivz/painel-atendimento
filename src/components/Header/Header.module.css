@@ -1,9 +1,5 @@
 .header{
    height: 12vh;
-   width: 100%;
-}
-
-.container{
    display: grid;
    gap: .5rem;
    grid-template-columns: repeat(3, 1fr)
