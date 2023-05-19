@@ -1,4 +1,4 @@
-.container{
+.container {
    align-items: center;
    display: flex;
    font-weight: bold;
@@ -6,7 +6,7 @@
    justify-content: space-between;
 }
 
-.informacoes{
+.informacoes {
    align-items: center;
    background-color: #f1eaea;
    border-color: #416075;
@@ -19,7 +19,7 @@
    width: 470px;
 }
 
-.chamado{
+.chamado {
    background-color: #d3fa27;
 }
 
@@ -27,12 +27,16 @@
    height: 8vh;
 }
 
-.sala{
+.iconeChamado {
+   height: 8vh;
+}
+
+.sala {
    border-right: solid #416075;
    width: 5vw;
 }
 
-.atendimento{
+.atendimento {
    text-align: left;
    width: calc(94% - 5vw);
 }
@@ -42,28 +46,28 @@
    font-weight: 600;
 }
 
-.informacoes h4{
+.informacoes h4 {
    font-size: 1.6rem;
    font-weight: 600;
    padding-bottom: .3rem;
 }
 
-.informacoes h5{
+.informacoes h5 {
    font-size: 1.1rem;
    padding-left: .3rem;
    width: 98%;
 }
 
-.informacoes p{
+.informacoes p {
    font-size: 1.2rem;
 }
 
-.medico{
+.medico {
    align-items: center;
    display: flex;
    justify-content: space-between;
 }
 
-.iconeMedico{
+.iconeMedico {
    height: 4vh;
 }
