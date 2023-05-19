@@ -2,66 +2,54 @@ import React, { useEffect, useMemo, useState } from 'react'
 import styles from "./Home.module.css"
 import Header from '../../components/Header/Header'
 import Card from '../../components/Card/Card';
-import atendimento from '../../utils/atendimento.json';
 import som from "../../assets/sound/chamado.3gpp";
-
 
 export default function Home() {
 
    const [atendimentos, setAtendimentos] = useState({});
-   const [dadosInseridos, setDadosInseridos] = useState({});
-   const [dadosRemovidos, setDadosRemovidos] = useState({});
+   const [novosAtendimentos, setNovosAtendimentos] = useState({});
 
    function tocarSom() {
       const audio = new Audio(som);
       audio.play()
    }
 
-   function identificarAlteracoes(dadosAntigos, dadosNovos) {
-      if(dadosNovos.length > dadosAntigos.length){
-         const dadosInseridos = [];
-   
-         for (let key in dadosNovos) {
-            if (!(key in dadosAntigos)) {
-               dadosInseridos.push(dadosNovos[key]);
-            }
-         }
-         setDadosInseridos({ ...dadosInseridos });
-      }
-      
-      if(dadosAntigos.length > dadosNovos.length){
-         for(let key in dadosAntigos){
-            if (!(key in dadosNovos)) {
-               delete atendimento[dadosAntigos[key]]
-            }
-         }
-      }
-   }
+   useEffect(() => {
+      fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         method: 'GET',
+      })
+         .then((res) => res.json())
+         .then((data) => {
+            setAtendimentos(data);
+         })
+         .catch((err) => {
+            alert('Deu erro');
+         });
+   }, []);
 
    useEffect(() => {
       const interval = setInterval(() => {
-         for (let i = 0; i < dadosInseridos.length; i++) {
-            delete atendimento[dadosInseridos[i]];
-         }
-         setAtendimentos(atendimento.reverse());
+         fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+            method: 'GET',
+         })
+            .then((res) => {
+               return res.json()
+            })
+            .then((data) => {
+               if(JSON.stringify(atendimentos) !== JSON.stringify(data)){
+                  setNovosAtendimentos(data);
+               }
+            })
+            .catch((err) => {
+               alert('Deu erro');
+            });
+   
       }, 1000);
 
       return () => clearInterval(interval);
-   }, []);
+   }, [atendimentos]);
 
-   const atendimentosMemoizado = useMemo(() => atendimentos, [atendimentos]);
-
-   useEffect(() => {
-      if (atendimento.length !== atendimentosMemoizado.length) {
-         if (atendimento.length > atendimentosMemoizado.length) {
-            setTimeout(() => {
-               tocarSom();
-            }, 1000)
-         }
-
-         identificarAlteracoes(atendimentosMemoizado, atendimento);
-      }
-   }, [atendimentosMemoizado]);
+   const atendimentosMemoizado = useMemo(() => novosAtendimentos, [novosAtendimentos]);
 
    return (
       <section className={styles.home}>
@@ -71,24 +59,24 @@ export default function Home() {
                   <Header />
                   <div className={styles.cards}>
                      <audio muted hidden id='audio' autoPlay />
-                     {
-                        Object.values(dadosInseridos).map((atendimento, index) => {
-                           return <Card
-                              key={`${atendimento.sala}index}`}
-                              nomeMedico={atendimento.profissional}
-                              nomePaciente={atendimento.nome}
-                              numeroSala={atendimento.sala}
-                              chamado={true}
-                           />
-                        })
-                     }
+                     {/* {
+                     Object.values(dadosInseridos).map((atendimento, index) => {
+                        return <Card
+                           key={`${atendimento.sala}index}`}
+                           nomeMedico={atendimento.profissional}
+                           nomePaciente={atendimento.nome}
+                           numeroSala={atendimento.sala}
+                           chamado={true}
+                        />
+                     })
+                  } */}
                      {
                         Object.values(atendimentosMemoizado).map((atendimento, index) => {
                            return <Card
-                              key={`${atendimento.sala}index}`}
-                              nomeMedico={atendimento.profissional}
-                              nomePaciente={atendimento.nome}
-                              numeroSala={atendimento.sala}
+                              key={`${atendimento.NUM_SALA} ${index}`}
+                              nomeMedico={atendimento.NOM_PROF}
+                              nomePaciente={atendimento.NOM_USUA_SUS}
+                              numeroSala={atendimento.NUM_SALA}
                            />
                         })
                      }
