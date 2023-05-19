@@ -15,7 +15,7 @@ export default function Home() {
    }
 
    useEffect(() => {
-      fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+      fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
          method: 'GET',
       })
          .then((res) => res.json())
@@ -29,7 +29,7 @@ export default function Home() {
 
    useEffect(() => {
       const interval = setInterval(() => {
-         fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
