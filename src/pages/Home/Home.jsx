@@ -16,6 +16,7 @@ export default function Home() {
 
    useEffect(() => {
       fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+      // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
          method: 'GET',
       })
          .then((res) => res.json())
@@ -23,27 +24,30 @@ export default function Home() {
             setAtendimentos(data);
          })
          .catch((err) => {
-            alert('Deu erro');
+            alert(err);
          });
    }, []);
 
    useEffect(() => {
       const interval = setInterval(() => {
          fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
                return res.json()
             })
             .then((data) => {
-               if(JSON.stringify(atendimentos) !== JSON.stringify(data)){
+               let objetoAtendimentos = JSON.stringify(atendimentos);
+               let objetoData = JSON.stringify(data);
+               if (objetoAtendimentos !== objetoData) {
                   setNovosAtendimentos(data);
                }
             })
             .catch((err) => {
-               alert('Deu erro');
+               alert(err);
             });
-   
+
       }, 1000);
 
       return () => clearInterval(interval);
@@ -60,16 +64,16 @@ export default function Home() {
                   <div className={styles.cards}>
                      <audio muted hidden id='audio' autoPlay />
                      {/* {
-                     Object.values(dadosInseridos).map((atendimento, index) => {
-                        return <Card
-                           key={`${atendimento.sala}index}`}
-                           nomeMedico={atendimento.profissional}
-                           nomePaciente={atendimento.nome}
-                           numeroSala={atendimento.sala}
-                           chamado={true}
-                        />
-                     })
-                  } */}
+                        Object.values(dadosInseridos).map((atendimento, index) => {
+                           return <Card
+                              key={`${atendimento.sala}index}`}
+                              nomeMedico={atendimento.profissional}
+                              nomePaciente={atendimento.nome}
+                              numeroSala={atendimento.sala}
+                              chamado={true}
+                           />
+                        })
+                     } */}
                      {
                         Object.values(atendimentosMemoizado).map((atendimento, index) => {
                            return <Card
