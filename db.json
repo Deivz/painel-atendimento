@@ -1,0 +1,28 @@
+{
+   "pacientes": [
+      {
+         "COD_ATENDIMENTO": 100,
+         "COD_SIA_UPS": 6943977,
+         "NUM_CPF_PROF": null,
+         "NOM_PROF": "BRITO DE SOUSA",
+         "NOM_USUA_SUS": "ILDA BARBOSA LEAL SOUZA",
+         "NUM_SALA": 6
+      },
+      {
+         "COD_ATENDIMENTO": 100,
+         "COD_SIA_UPS": 6943977,
+         "NUM_CPF_PROF": null,
+         "NOM_PROF": "WALLACE BRITO DE SOUSA",
+         "NOM_USUA_SUS": "ALGUM PACIENTE",
+         "NUM_SALA": 7
+      },      
+      {
+         "COD_ATENDIMENTO": 100,
+         "COD_SIA_UPS": 6943977,
+         "NUM_CPF_PROF": null,
+         "NOM_PROF": "TIAGO WAINBERG",
+         "NOM_USUA_SUS": "FULANO DA SILVA JUNIOR",
+         "NUM_SALA": 2
+      }
+   ]
+}

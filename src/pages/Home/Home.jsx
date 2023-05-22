@@ -7,6 +7,11 @@ import som from "../../assets/sound/chamado.3gpp";
 export default function Home() {
 
    const [atendimentos, setAtendimentos] = useState({});
+   const [haDadosRemovidos, setHaDadosRemovidos] = useState(false);
+   
+   const [dadosInseridos, setDadosInseridos] = useState({});
+   const [dadosRemovidos, setDadosRemovidos] = useState({});
+   
    const [novosAtendimentos, setNovosAtendimentos] = useState({});
 
    function tocarSom() {
@@ -14,9 +19,41 @@ export default function Home() {
       audio.play()
    }
 
+   function identificarAlteracoes(dadosAntigos, dadosNovos) {
+
+      // adicionar paciente a fila
+      if (dadosNovos.length > dadosAntigos.length) {
+         const dadosInseridos = [];
+
+         for (let key in dadosNovos) {
+            if (!(key in dadosAntigos)) {
+               dadosInseridos.push(dadosNovos[key]);
+               delete atendimentosMemoizado[dadosNovos[key]]
+               setHaDadosRemovidos(true);
+               setDadosRemovidos(atendimentosMemoizado);
+            }
+         }
+         setDadosInseridos({ ...dadosInseridos });
+      }
+
+      // remover paciente da fila
+      if (dadosAntigos.length > dadosNovos.length) {
+         for (let key in dadosAntigos) {
+            if (!(key in dadosNovos)) {
+               delete novosAtendimentos[dadosAntigos[key]];
+            }
+            
+            if(key in dadosInseridos){
+               console.log(dadosInseridos[key]);
+               delete dadosInseridos[key];
+               setDadosInseridos({ ...dadosInseridos });
+            }
+         }
+      }
+   }
+
    useEffect(() => {
-      fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-      // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+      fetch('http://localhost:3004/pacientes', {
          method: 'GET',
       })
          .then((res) => res.json())
@@ -26,23 +63,21 @@ export default function Home() {
          .catch((err) => {
             alert(err);
          });
+
    }, []);
 
    useEffect(() => {
       const interval = setInterval(() => {
-         fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-         // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         fetch('http://localhost:3004/pacientes', {
+            // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+            // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
                return res.json()
             })
             .then((data) => {
-               let objetoAtendimentos = JSON.stringify(atendimentos);
-               let objetoData = JSON.stringify(data);
-               if (objetoAtendimentos !== objetoData) {
-                  setNovosAtendimentos(data);
-               }
+               setNovosAtendimentos(data);
             })
             .catch((err) => {
                alert(err);
@@ -51,9 +86,21 @@ export default function Home() {
       }, 1000);
 
       return () => clearInterval(interval);
-   }, [atendimentos]);
+   }, []);
 
-   const atendimentosMemoizado = useMemo(() => novosAtendimentos, [novosAtendimentos]);
+   useEffect(() => {
+      if (atendimentosMemoizado.length !== novosAtendimentos.length) {
+         if (novosAtendimentos.length > atendimentosMemoizado.length) {
+            setTimeout(() => {
+               tocarSom();
+            }, 1000)
+         }
+         setAtendimentos(novosAtendimentos);
+         identificarAlteracoes(atendimentosMemoizado, novosAtendimentos);
+      }
+   }, [novosAtendimentos])
+
+   const atendimentosMemoizado = useMemo(() => atendimentos, [atendimentos]);
 
    return (
       <section className={styles.home}>
@@ -63,21 +110,32 @@ export default function Home() {
                   <Header />
                   <div className={styles.cards}>
                      <audio muted hidden id='audio' autoPlay />
-                     {/* {
+                     {
                         Object.values(dadosInseridos).map((atendimento, index) => {
                            return <Card
-                              key={`${atendimento.sala}index}`}
-                              nomeMedico={atendimento.profissional}
-                              nomePaciente={atendimento.nome}
-                              numeroSala={atendimento.sala}
+                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
+                              nomeMedico={atendimento.NOM_PROF}
+                              nomePaciente={atendimento.NOM_USUA_SUS}
+                              numeroSala={atendimento.NUM_SALA}
                               chamado={true}
                            />
                         })
-                     } */}
+                     }
                      {
+                        haDadosRemovidos
+                        ?
+                        Object.values(dadosRemovidos).map((atendimento, index) => {
+                           return <Card
+                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
+                              nomeMedico={atendimento.NOM_PROF}
+                              nomePaciente={atendimento.NOM_USUA_SUS}
+                              numeroSala={atendimento.NUM_SALA}
+                           />
+                        })
+                        :
                         Object.values(atendimentosMemoizado).map((atendimento, index) => {
                            return <Card
-                              key={`${atendimento.NUM_SALA} ${index}`}
+                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
                               nomeMedico={atendimento.NOM_PROF}
                               nomePaciente={atendimento.NOM_USUA_SUS}
                               numeroSala={atendimento.NUM_SALA}
