@@ -8,10 +8,10 @@ export default function Home() {
 
    const [atendimentos, setAtendimentos] = useState({});
    const [haDadosRemovidos, setHaDadosRemovidos] = useState(false);
-   
+
    const [dadosInseridos, setDadosInseridos] = useState({});
    const [dadosRemovidos, setDadosRemovidos] = useState({});
-   
+
    const [novosAtendimentos, setNovosAtendimentos] = useState({});
 
    function tocarSom() {
@@ -42,8 +42,8 @@ export default function Home() {
             if (!(key in dadosNovos)) {
                delete novosAtendimentos[dadosAntigos[key]];
             }
-            
-            if(key in dadosInseridos){
+
+            if (key in dadosInseridos) {
                console.log(dadosInseridos[key]);
                delete dadosInseridos[key];
                setDadosInseridos({ ...dadosInseridos });
@@ -53,8 +53,7 @@ export default function Home() {
    }
 
    useEffect(() => {
-      // fetch('http://localhost:3004/pacientes', {
-         fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+      fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
          method: 'GET',
       })
          .then((res) => res.json())
@@ -70,8 +69,8 @@ export default function Home() {
    useEffect(() => {
       const interval = setInterval(() => {
          // fetch('http://localhost:3004/pacientes', {
-            fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-            // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
@@ -112,36 +111,16 @@ export default function Home() {
                   <div className={styles.cards}>
                      <audio muted hidden id='audio' autoPlay />
                      {
-                        Object.values(dadosInseridos).map((atendimento, index) => {
-                           return <Card
-                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
-                              nomeMedico={atendimento.NOM_PROF}
-                              nomePaciente={atendimento.NOM_USUA_SUS}
-                              numeroSala={atendimento.NUM_SALA}
-                              chamado={true}
-                           />
-                        })
-                     }
-                     {
-                        haDadosRemovidos
-                        ?
-                        Object.values(dadosRemovidos).map((atendimento, index) => {
-                           return <Card
-                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
-                              nomeMedico={atendimento.NOM_PROF}
-                              nomePaciente={atendimento.NOM_USUA_SUS}
-                              numeroSala={atendimento.NUM_SALA}
-                           />
-                        })
-                        :
-                        Object.values(atendimentosMemoizado).map((atendimento, index) => {
-                           return <Card
-                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
-                              nomeMedico={atendimento.NOM_PROF}
-                              nomePaciente={atendimento.NOM_USUA_SUS}
-                              numeroSala={atendimento.NUM_SALA}
-                           />
-                        })
+                           Object.values(atendimentosMemoizado).map((atendimento, index) => {
+                              {console.log(atendimento.PRIORIDADE)}
+                              return <Card
+                                 key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
+                                 nomeMedico={atendimento.NOM_PROF}
+                                 nomePaciente={atendimento.NOM_USUA_SUS}
+                                 numeroSala={atendimento.NUM_SALA}
+                                 chamado={atendimento.PRIORIDADE}
+                                 />
+                           })
                      }
                   </div>
                </div>

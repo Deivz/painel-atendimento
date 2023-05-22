@@ -1,33 +1,47 @@
-.header{
+.header {
    height: 12vh;
    display: grid;
    gap: .5rem;
    grid-template-columns: repeat(3, 1fr)
 }
 
-.logo{
+.logo {
    height: 11vh;
    padding-left: 1.5rem;
 }
 
-.textoCentral{
+.textoCentral {
    align-items: center;
    display: flex;
    flex-direction: column;
    justify-content: center;
 }
 
-.ups{
+.ups {
    align-items: center;
    display: flex;
 }
 
-.icone{
+.icone {
    height: 6vh;
 }
 
-.titulo{
+.titulo {
    color: #416075;
    font-weight: 600;
-   font-size: 2rem;
+   font-size: 1.5rem;
+}
+
+.texto {
+   font-size: 1rem;
+}
+
+@media (min-width: 1440px) {
+   .titulo {
+      font-size: 2rem;
+   }
+
+   .texto {
+      font-size: 1.5rem;
+   }
 }

@@ -2,7 +2,7 @@
    align-items: center;
    display: flex;
    font-weight: bold;
-   width: 560px;
+   width: 410px;
    justify-content: space-between;
 }
 
@@ -13,10 +13,10 @@
    border-radius: 10px;
    border-style: solid;
    display: flex;
-   height: 12vh;
+   height: 14vh;
    justify-content: space-between;
    text-align: center;
-   width: 470px;
+   width: 355px;
 }
 
 .chamado {
@@ -42,24 +42,24 @@
 }
 
 .informacoes h3 {
-   font-size: 3rem;
+   font-size: 2rem;
    font-weight: 600;
 }
 
 .informacoes h4 {
-   font-size: 1.6rem;
+   font-size: 1.3rem;
    font-weight: 600;
    padding-bottom: .3rem;
 }
 
 .informacoes h5 {
-   font-size: 1.1rem;
+   font-size: .8rem;
    padding-left: .3rem;
    width: 98%;
 }
 
 .informacoes p {
-   font-size: 1.2rem;
+   font-size: 1rem;
 }
 
 .medico {
@@ -69,5 +69,39 @@
 }
 
 .iconeMedico {
-   height: 4vh;
+   height: 3vh;
+}
+
+@media (min-width: 1440px) {
+   .container {
+      width: 560px;
+   }
+
+   .informacoes {
+      height: 12vh;
+      width: 470px;
+   }
+
+   .informacoes h3 {
+      font-size: 3rem;
+   }
+   
+   .informacoes h4 {
+      font-size: 1.6rem;
+      padding-bottom: .3rem;
+   }
+   
+   .informacoes h5 {
+      font-size: 1.1rem;
+      padding-left: .3rem;
+      width: 98%;
+   }
+   
+   .informacoes p {
+      font-size: 1.2rem;
+   }
+   
+   .iconeMedico {
+      height: 4vh;
+   }
 }
