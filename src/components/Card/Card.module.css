@@ -2,8 +2,10 @@
    align-items: center;
    display: flex;
    font-weight: bold;
-   width: 410px;
    justify-content: space-between;
+   margin: 0 auto;
+   padding-top: 1rem;
+   width: 340px;
 }
 
 .informacoes {
@@ -13,10 +15,10 @@
    border-radius: 10px;
    border-style: solid;
    display: flex;
-   height: 14vh;
+   height: 100px;
    justify-content: space-between;
    text-align: center;
-   width: 355px;
+   width: 340px;
 }
 
 .chamado {
@@ -24,30 +26,30 @@
 }
 
 .icone {
-   height: 8vh;
+   height: 63px;
 }
 
 .iconeChamado {
-   height: 8vh;
+   height: 63px;
 }
 
 .sala {
    border-right: solid #416075;
-   width: 5vw;
+   width: 60px;
 }
 
 .atendimento {
    text-align: left;
-   width: calc(94% - 5vw);
+   width: calc(94% - 60px);
 }
 
 .informacoes h3 {
-   font-size: 2rem;
+   font-size: 1.6rem;
    font-weight: 600;
 }
 
 .informacoes h4 {
-   font-size: 1.3rem;
+   font-size: 1rem;
    font-weight: 600;
    padding-bottom: .3rem;
 }
@@ -72,7 +74,56 @@
    height: 3vh;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1300px) {
+   .container {
+      width: 410px;
+   }
+
+   .informacoes {
+      width: 355px;
+   }
+
+   .sala {
+      width: 80px;
+   }
+
+   .atendimento {
+      width: calc(94% - 80px);
+   }
+
+   .informacoes h3 {
+      font-size: 2rem;
+      font-weight: 600;
+   }
+
+   .informacoes h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding-bottom: .3rem;
+   }
+
+   .informacoes h5 {
+      font-size: .8rem;
+      padding-left: .3rem;
+      width: 98%;
+   }
+
+   .informacoes p {
+      font-size: 1rem;
+   }
+
+   .medico {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .iconeMedico {
+      height: 3vh;
+   }
+}
+
+@media (min-width: 1900px) {
    .container {
       width: 560px;
    }
@@ -85,22 +136,22 @@
    .informacoes h3 {
       font-size: 3rem;
    }
-   
+
    .informacoes h4 {
       font-size: 1.6rem;
       padding-bottom: .3rem;
    }
-   
+
    .informacoes h5 {
       font-size: 1.1rem;
       padding-left: .3rem;
       width: 98%;
    }
-   
+
    .informacoes p {
       font-size: 1.2rem;
    }
-   
+
    .iconeMedico {
       height: 4vh;
    }

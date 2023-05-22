@@ -6,7 +6,8 @@
          "NUM_CPF_PROF": null,
          "NOM_PROF": "BRITO DE SOUSA",
          "NOM_USUA_SUS": "ILDA BARBOSA LEAL SOUZA",
-         "NUM_SALA": 6
+         "NUM_SALA": 6,
+         "PRIORIDADE": false
       },
       {
          "COD_ATENDIMENTO": 100,
@@ -14,7 +15,8 @@
          "NUM_CPF_PROF": null,
          "NOM_PROF": "WALLACE BRITO DE SOUSA",
          "NOM_USUA_SUS": "ALGUM PACIENTE",
-         "NUM_SALA": 7
+         "NUM_SALA": 7,
+         "PRIORIDADE": false
       },      
       {
          "COD_ATENDIMENTO": 100,
@@ -22,7 +24,26 @@
          "NUM_CPF_PROF": null,
          "NOM_PROF": "TIAGO WAINBERG",
          "NOM_USUA_SUS": "FULANO DA SILVA JUNIOR",
-         "NUM_SALA": 2
+         "NUM_SALA": 2,
+         "PRIORIDADE": true
+      },
+      {
+         "COD_ATENDIMENTO": 100,
+         "COD_SIA_UPS": 6943977,
+         "NUM_CPF_PROF": null,
+         "NOM_PROF": "WALLACE BRITO DE SOUSA",
+         "NOM_USUA_SUS": "ALGUM PACIENTE",
+         "NUM_SALA": 7,
+         "PRIORIDADE": false
+      },      
+      {
+         "COD_ATENDIMENTO": 100,
+         "COD_SIA_UPS": 6943977,
+         "NUM_CPF_PROF": null,
+         "NOM_PROF": "TIAGO WAINBERG",
+         "NOM_USUA_SUS": "FULANO DA SILVA JUNIOR",
+         "NUM_SALA": 2,
+         "PRIORIDADE": true
       }
    ]
 }

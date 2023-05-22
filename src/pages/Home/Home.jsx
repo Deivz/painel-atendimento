@@ -19,41 +19,42 @@ export default function Home() {
       audio.play()
    }
 
-   function identificarAlteracoes(dadosAntigos, dadosNovos) {
+   // function identificarAlteracoes(dadosAntigos, dadosNovos) {
 
-      // adicionar paciente a fila
-      if (dadosNovos.length > dadosAntigos.length) {
-         const dadosInseridos = [];
+   //    // adicionar paciente a fila
+   //    if (dadosNovos.length > dadosAntigos.length) {
+   //       const dadosInseridos = [];
 
-         for (let key in dadosNovos) {
-            if (!(key in dadosAntigos)) {
-               dadosInseridos.push(dadosNovos[key]);
-               delete atendimentosMemoizado[dadosNovos[key]]
-               setHaDadosRemovidos(true);
-               setDadosRemovidos(atendimentosMemoizado);
-            }
-         }
-         setDadosInseridos({ ...dadosInseridos });
-      }
+   //       for (let key in dadosNovos) {
+   //          if (!(key in dadosAntigos)) {
+   //             dadosInseridos.push(dadosNovos[key]);
+   //             delete atendimentosMemoizado[dadosNovos[key]]
+   //             setHaDadosRemovidos(true);
+   //             setDadosRemovidos(atendimentosMemoizado);
+   //          }
+   //       }
+   //       setDadosInseridos({ ...dadosInseridos });
+   //    }
 
-      // remover paciente da fila
-      if (dadosAntigos.length > dadosNovos.length) {
-         for (let key in dadosAntigos) {
-            if (!(key in dadosNovos)) {
-               delete novosAtendimentos[dadosAntigos[key]];
-            }
+   //    // remover paciente da fila
+   //    if (dadosAntigos.length > dadosNovos.length) {
+   //       for (let key in dadosAntigos) {
+   //          if (!(key in dadosNovos)) {
+   //             delete novosAtendimentos[dadosAntigos[key]];
+   //          }
 
-            if (key in dadosInseridos) {
-               console.log(dadosInseridos[key]);
-               delete dadosInseridos[key];
-               setDadosInseridos({ ...dadosInseridos });
-            }
-         }
-      }
-   }
+   //          if (key in dadosInseridos) {
+   //             console.log(dadosInseridos[key]);
+   //             delete dadosInseridos[key];
+   //             setDadosInseridos({ ...dadosInseridos });
+   //          }
+   //       }
+   //    }
+   // }
 
    useEffect(() => {
-      fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+      fetch('http://localhost:3004/pacientes', {
+         // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
          method: 'GET',
       })
          .then((res) => res.json())
@@ -68,9 +69,9 @@ export default function Home() {
 
    useEffect(() => {
       const interval = setInterval(() => {
-         // fetch('http://localhost:3004/pacientes', {
-         // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-         fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         fetch('http://localhost:3004/pacientes', {
+            // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+            // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
@@ -96,7 +97,7 @@ export default function Home() {
             }, 1000)
          }
          setAtendimentos(novosAtendimentos);
-         identificarAlteracoes(atendimentosMemoizado, novosAtendimentos);
+         // identificarAlteracoes(atendimentosMemoizado, novosAtendimentos);
       }
    }, [novosAtendimentos])
 
@@ -111,16 +112,16 @@ export default function Home() {
                   <div className={styles.cards}>
                      <audio muted hidden id='audio' autoPlay />
                      {
-                           Object.values(atendimentosMemoizado).map((atendimento, index) => {
-                              {console.log(atendimento.PRIORIDADE)}
-                              return <Card
-                                 key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
-                                 nomeMedico={atendimento.NOM_PROF}
-                                 nomePaciente={atendimento.NOM_USUA_SUS}
-                                 numeroSala={atendimento.NUM_SALA}
-                                 chamado={atendimento.PRIORIDADE}
-                                 />
-                           })
+                        Object.values(atendimentosMemoizado).map((atendimento, index) => {
+                           { console.log(atendimento.PRIORIDADE) }
+                           return <Card
+                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
+                              nomeMedico={atendimento.NOM_PROF}
+                              nomePaciente={atendimento.NOM_USUA_SUS}
+                              numeroSala={atendimento.NUM_SALA}
+                              chamado={atendimento.PRIORIDADE}
+                           />
+                        })
                      }
                   </div>
                </div>

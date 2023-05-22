@@ -1,13 +1,13 @@
 .header {
-   height: 12vh;
-   display: grid;
-   gap: .5rem;
-   grid-template-columns: repeat(3, 1fr)
+   align-items: center;
+   display: flex;
+   flex-wrap: wrap;
+   height: 20vh;
+   justify-content: space-between;
 }
 
 .logo {
    height: 11vh;
-   padding-left: 1.5rem;
 }
 
 .textoCentral {
@@ -15,6 +15,8 @@
    display: flex;
    flex-direction: column;
    justify-content: center;
+   margin: 0 auto;
+   order: 3;
 }
 
 .ups {
@@ -33,15 +35,49 @@
 }
 
 .texto {
-   font-size: 1rem;
+   font-size: .8rem;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 600px) {
+   .textoCentral {
+      margin: auto;
+      order: unset;
+   }
+}
+
+@media (min-width: 1300px) {
+   .header {
+      height: 12vh;
+      display: grid;
+      gap: .5rem;
+      grid-template-columns: repeat(3, 1fr)
+   }
+
+   .logo {
+      height: 11vh;
+      padding-left: 1.5rem;
+   }
+
+   .icone {
+      height: 6vh;
+   }
+
+   .titulo {
+      font-weight: 600;
+      font-size: 1.5rem;
+   }
+
+   .texto {
+      font-size: 1rem;
+   }
+}
+
+@media (min-width: 1900px) {
    .titulo {
       font-size: 2rem;
    }
 
    .texto {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
    }
 }

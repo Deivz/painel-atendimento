@@ -2,20 +2,37 @@
    align-items: baseline;
    display: flex;
    justify-content: end;
-   padding-right: 1.5rem;
-   width: 100%;
+   width: 160px;
 }
 
 .dateCard {
    align-items: center;
    display: flex;
    font-family: Arial, Helvetica, sans-serif;
-   font-size: 1.5rem;
-   justify-content: flex-end;
-   width: 250px;
+   font-size: 1.3rem;
+   justify-content: space-between;
+   width: 100%;
 }
 
 .calendario {
-   height: 6vh;
-   padding-right: .5rem;
+   width: 34px;
+}
+
+@media (min-width: 1300px) {
+   .container{
+      justify-content: end;
+      padding-right: 1.5rem;
+      width: 100%;
+   }
+   
+   .dateCard {
+      font-size: 1.5rem;
+      justify-content: flex-end;
+      width: 250px;
+   }
+   
+   .calendario {
+      width: 60px;
+      padding-right: .5rem;
+   }
 }
