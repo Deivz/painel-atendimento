@@ -31,9 +31,11 @@ export default function Home() {
             })
             .then((data) => {
                let tamanhoAtual = data.length;
+               let novosAtendimentos = JSON.stringify(data);
                let tamanhoAntigo = atendimentos.length;
+               let atendimentosAntigos = JSON.stringify(atendimentos);
                
-               if(tamanhoAtual !== tamanhoAntigo){
+               if(novosAtendimentos !== atendimentosAntigos){
 
                   if(tamanhoAtual > tamanhoAntigo){
                      tocarSom();
