@@ -18,9 +18,8 @@ export default function Home() {
    useEffect(() => {
       const interval = setInterval(function(atendimentos) {
          
-         // fetch('http://localhost:3004/pacientes', {
-         // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-         fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
@@ -64,7 +63,7 @@ export default function Home() {
                      {
                         Object.values(atendimentosMemoizado).map((atendimento, index) => {
                            return <Card
-                              key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
+                              key={atendimento.COD_ATENDIMENTO}
                               nomeMedico={atendimento.NOM_PROF}
                               nomePaciente={atendimento.NOM_USUA_SUS}
                               numeroSala={atendimento.NUM_SALA}

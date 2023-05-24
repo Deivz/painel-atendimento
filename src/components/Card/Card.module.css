@@ -2,7 +2,6 @@
    align-items: center;
    display: flex;
    font-weight: bold;
-   justify-content: space-between;
    margin: 0 auto;
    padding-top: 1rem;
    width: 340px;
@@ -25,12 +24,9 @@
    background-color: #d3fa27;
 }
 
-.icone {
+.icone, .iconeChamado {
    height: 63px;
-}
-
-.iconeChamado {
-   height: 63px;
+   padding-right: .5rem;
 }
 
 .sala {
@@ -40,6 +36,7 @@
 
 .atendimento {
    text-align: left;
+   padding-right: .3rem;
    width: calc(94% - 60px);
 }
 
