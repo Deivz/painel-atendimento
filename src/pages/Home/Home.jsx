@@ -6,10 +6,9 @@ import som from "../../assets/sound/chamado.3gpp";
 
 export default function Home() {
 
-   const [atendimentos, setAtendimentos] = useState({});
-   const [novosAtendimentos, setNovosAtendimentos] = useState({});
+   const [atendimentos, setAtendimentos] = useState([]);
 
-   // const atendimentosMemoizado = useMemo(() => atendimentos, [atendimentos]);
+   const atendimentosMemoizado = useMemo(() => atendimentos, [atendimentos]);
 
    function tocarSom() {
       const audio = new Audio(som);
@@ -17,7 +16,8 @@ export default function Home() {
    }
 
    useEffect(() => {
-      const interval = setInterval(() => {
+      const interval = setInterval(function(atendimentos) {
+         
          // fetch('http://localhost:3004/pacientes', {
          // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
          fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
@@ -31,29 +31,27 @@ export default function Home() {
                return new Promise();
             })
             .then((data) => {
-               setNovosAtendimentos(data);
+               let tamanhoAtual = data.length;
+               let tamanhoAntigo = atendimentos.length;
+               
+               if(tamanhoAtual !== tamanhoAntigo){
+
+                  if(tamanhoAtual > tamanhoAntigo){
+                     tocarSom();
+                  }
+
+                  setAtendimentos(data);
+               }
+
             })
             .catch((err) => {
                console.log(err);
             });
 
-      }, 1000);
+      }, 5000, atendimentosMemoizado);
 
       return () => clearInterval(interval);
-   }, []);
-
-
-   useEffect(() => {
-      if (atendimentos.length !== novosAtendimentos.length) {
-         console.log("agui")
-         if (novosAtendimentos.length > atendimentos.length) {
-            setTimeout(() => {
-               tocarSom();
-            }, 1000)
-         }
-         setAtendimentos(novosAtendimentos);
-      }
-   }, [novosAtendimentos])
+   }, [atendimentosMemoizado]);
 
    return (
       <section className={styles.home}>
@@ -64,7 +62,7 @@ export default function Home() {
                   <div className={styles.cards}>
                      <audio muted hidden id='audio' autoPlay />
                      {
-                        Object.values(atendimentos).map((atendimento, index) => {
+                        Object.values(atendimentosMemoizado).map((atendimento, index) => {
                            return <Card
                               key={`${atendimento.NUM_SALA}${index}${Math.random()}`}
                               nomeMedico={atendimento.NOM_PROF}
