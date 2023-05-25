@@ -4,7 +4,7 @@
    font-weight: bold;
    margin: 0 auto;
    padding-top: 1rem;
-   width: 340px;
+   /* width: 340px; */
 }
 
 .informacoes {
@@ -14,8 +14,8 @@
    border-radius: 10px;
    border-style: solid;
    display: flex;
-   height: 100px;
    justify-content: space-between;
+   min-height: 100px;
    text-align: center;
    width: 340px;
 }
@@ -24,13 +24,15 @@
    background-color: #d3fa27;
 }
 
-.icone, .iconeChamado {
+.icone,
+.iconeChamado {
    height: 63px;
    padding-right: .5rem;
 }
 
 .sala {
    border-right: solid #416075;
+   min-height: 70px;
    width: 60px;
 }
 
@@ -46,8 +48,11 @@
 }
 
 .informacoes h4 {
+   align-items: center;
+   display: flex;
    font-size: 1rem;
    font-weight: 600;
+   min-height: 60px;
    padding-bottom: .3rem;
 }
 
@@ -68,55 +73,13 @@
 }
 
 .iconeMedico {
-   height: 3vh;
+   height: 26px;
 }
 
-@media (min-width: 1300px) {
+
+@media (min-width: 600px) {
    .container {
-      width: 410px;
-   }
-
-   .informacoes {
-      width: 355px;
-   }
-
-   .sala {
-      width: 80px;
-   }
-
-   .atendimento {
-      width: calc(94% - 80px);
-   }
-
-   .informacoes h3 {
-      font-size: 2rem;
-      font-weight: 600;
-   }
-
-   .informacoes h4 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      padding-bottom: .3rem;
-   }
-
-   .informacoes h5 {
-      font-size: .8rem;
-      padding-left: .3rem;
-      width: 98%;
-   }
-
-   .informacoes p {
-      font-size: 1rem;
-   }
-
-   .medico {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-   }
-
-   .iconeMedico {
-      height: 3vh;
+      width: 400px;
    }
 }
 
