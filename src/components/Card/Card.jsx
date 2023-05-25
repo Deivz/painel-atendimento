@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Card.module.css';
 import icone from '../../assets/img/chamado.png';
 import iconeChamado from '../../assets/img/icone_chamado.png';
-import medico from '../../assets/img/doc.png';
+import medico from '../../assets/img/esteto_icon.png';
 
 export default function Card({ chamado, nomeMedico, nomePaciente, numeroSala }) {
    return (
