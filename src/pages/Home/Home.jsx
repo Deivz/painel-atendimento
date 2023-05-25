@@ -15,12 +15,28 @@ export default function Home() {
       audio.play()
    }
 
+   function chamarPaciente(data) {
+      tocarSom();
+      setTimeout(() => {
+         if ('speechSynthesis' in window) {
+            data.forEach(paciente => {
+               if (paciente.PRIORIDADE) {
+                  const speech = new SpeechSynthesisUtterance([paciente.NOM_USUA_SUS.toLowerCase(), `sala ${paciente.NUM_SALA}`]);
+                  speech.lang = 'pt-BR';
+                  window.speechSynthesis.speak(speech);
+               }
+            });
+         };
+
+      }, 2000);
+   }
+
    useEffect(() => {
-      const interval = setInterval(function(atendimentos) {
-         
+      const interval = setInterval(function (atendimentos) {
+
          fetch('https://portoseguro.alztecnologia.com.br/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-         // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-         // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+            // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+            // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
@@ -35,11 +51,12 @@ export default function Home() {
                let novosAtendimentos = JSON.stringify(data);
                let tamanhoAntigo = atendimentos.length;
                let atendimentosAntigos = JSON.stringify(atendimentos);
-               
-               if(novosAtendimentos !== atendimentosAntigos){
 
-                  if(tamanhoAtual > tamanhoAntigo){
-                     tocarSom();
+               if (novosAtendimentos !== atendimentosAntigos) {
+
+                  if (tamanhoAtual > tamanhoAntigo) {
+                     // tocarSom();
+                     chamarPaciente(data);
                   }
 
                   setAtendimentos(data);
@@ -50,7 +67,7 @@ export default function Home() {
                console.log(err);
             });
 
-      }, 5000, atendimentosMemoizado);
+      }, 10000, atendimentosMemoizado);
 
       return () => clearInterval(interval);
    }, [atendimentosMemoizado]);
