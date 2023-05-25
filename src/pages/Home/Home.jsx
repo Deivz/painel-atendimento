@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import styles from "./Home.module.css"
 import Header from '../../components/Header/Header'
 import Card from '../../components/Card/Card';
-import som from "../../assets/sound/chamado.3gpp";
+import som from "../../assets/sound/Alert.mp3";
 
 export default function Home() {
 
@@ -18,7 +18,8 @@ export default function Home() {
    useEffect(() => {
       const interval = setInterval(function(atendimentos) {
          
-         fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         fetch('https://portoseguro.alztecnologia.com.br/clinica_prontuario/lista-atendimentos/painel-atendimento', {
+         // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
          // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
