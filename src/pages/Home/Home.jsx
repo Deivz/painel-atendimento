@@ -28,7 +28,7 @@ export default function Home() {
             });
          };
 
-      }, 2000);
+      }, 1500);
    }
 
    useEffect(() => {
@@ -54,8 +54,7 @@ export default function Home() {
 
                if (novosAtendimentos !== atendimentosAntigos) {
 
-                  if (tamanhoAtual > tamanhoAntigo) {
-                     // tocarSom();
+                  if (tamanhoAtual >= tamanhoAntigo) {
                      chamarPaciente(data);
                   }
 
@@ -88,6 +87,9 @@ export default function Home() {
                               nomePaciente={atendimento.NOM_USUA_SUS}
                               numeroSala={atendimento.NUM_SALA}
                               chamado={atendimento.PRIORIDADE}
+                              tipo={
+                                 !isNaN(parseFloat(atendimento.NUM_SALA)) && isFinite(atendimento.NUM_SALA)? 'numero' : 'texto'
+                              }
                            />
                         })
                      }

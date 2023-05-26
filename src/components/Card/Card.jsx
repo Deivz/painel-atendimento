@@ -4,7 +4,36 @@ import icone from '../../assets/img/chamado.png';
 import iconeChamado from '../../assets/img/icone_chamado.png';
 import medico from '../../assets/img/esteto_icon.png';
 
-export default function Card({ chamado, nomeMedico, nomePaciente, numeroSala }) {
+export default function Card({ chamado, nomeMedico, nomePaciente, numeroSala, tipo }) {
+
+   let estilo = '';
+   let salaEstilo = '';
+   let atendimentoEstilo = '';
+
+   if (chamado) {
+
+      estilo = `${styles.informacoes} ${styles.chamado}`;
+
+      if (tipo === 'numero') {
+         estilo += ` ${styles.tipoNumero}`;
+      }
+
+   } else {
+
+      estilo = `${styles.informacoes}`;
+
+      if (tipo === 'numero') {
+         estilo += ` ${styles.tipoNumero}`;
+      }
+
+   }
+
+   if (tipo === 'texto') {
+      salaEstilo = `${styles.sala} ${styles.salaTexto}`;
+   } else {
+      salaEstilo = `${styles.sala} ${styles.salaNumero}`;
+   }
+
    return (
       <div className={styles.container}>
          {
@@ -12,12 +41,12 @@ export default function Card({ chamado, nomeMedico, nomePaciente, numeroSala }) 
                ? <img className={styles.icone} src={iconeChamado} />
                : <img className={styles.icone} src={icone} />
          }
-         <div className={chamado ? `${styles.informacoes} ${styles.chamado}` : `${styles.informacoes}`}>
-            <div className={styles.sala}>
+         <div className={estilo}>
+            <div className={salaEstilo}>
                <p>Sala:</p>
                <h3>{numeroSala}</h3>
             </div>
-            <div className={styles.atendimento}>
+            <div className={tipo === 'texto' ? styles.atendimentoTexto : styles.atendimentoNumero}>
                <h4>{nomePaciente}</h4>
                <div className={styles.medico}>
                   <img className={styles.iconeMedico} src={medico} />
