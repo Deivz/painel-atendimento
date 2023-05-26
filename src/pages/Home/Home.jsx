@@ -21,7 +21,7 @@ export default function Home() {
          if ('speechSynthesis' in window) {
             data.forEach(paciente => {
                if (paciente.PRIORIDADE) {
-                  if(paciente.NUM_SALA === null){
+                  if(paciente.NUM_SALA === 'null'){
                      const speech = new SpeechSynthesisUtterance([paciente.NOM_USUA_SUS.toLowerCase(), 'Recepção']);
                      speech.lang = 'pt-BR';
                      window.speechSynthesis.speak(speech);
