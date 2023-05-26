@@ -21,22 +21,26 @@ export default function Home() {
          if ('speechSynthesis' in window) {
             data.forEach(paciente => {
                if (paciente.PRIORIDADE) {
-                  const speech = new SpeechSynthesisUtterance([paciente.NOM_USUA_SUS.toLowerCase(), `sala ${paciente.NUM_SALA}`]);
-                  speech.lang = 'pt-BR';
-                  window.speechSynthesis.speak(speech);
+                  if(paciente.NUM_SALA === null){
+                     const speech = new SpeechSynthesisUtterance([paciente.NOM_USUA_SUS.toLowerCase(), 'Recepção']);
+                     speech.lang = 'pt-BR';
+                     window.speechSynthesis.speak(speech);
+                  } else {
+                     const speech = new SpeechSynthesisUtterance([paciente.NOM_USUA_SUS.toLowerCase(), `sala ${paciente.NUM_SALA}`]);
+                     speech.lang = 'pt-BR';
+                     window.speechSynthesis.speak(speech);
+                  }
                }
             });
          };
 
-      }, 1500);
+      }, 1700);
    }
 
    useEffect(() => {
       const interval = setInterval(function (atendimentos) {
 
          fetch('https://portoseguro.alztecnologia.com.br/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-            // fetch('http://186.202.139.29/homologacao/portoseguro/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
-            // fetch('http://hqsrv02:81/Carlos.Santos/alianza/clinica_prontuario/lista-atendimentos/painel-atendimento', {
             method: 'GET',
          })
             .then((res) => {
@@ -85,7 +89,7 @@ export default function Home() {
                               key={atendimento.COD_ATENDIMENTO}
                               nomeMedico={atendimento.NOM_PROF}
                               nomePaciente={atendimento.NOM_USUA_SUS}
-                              numeroSala={atendimento.NUM_SALA}
+                              numeroSala={atendimento.NUM_SALA === 'null' ? 'RECEPÇÃO' : atendimento.NUM_SALA}
                               chamado={atendimento.PRIORIDADE}
                               tipo={
                                  !isNaN(parseFloat(atendimento.NUM_SALA)) && isFinite(atendimento.NUM_SALA)? 'numero' : 'texto'

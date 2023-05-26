@@ -18,6 +18,10 @@
    padding: 0 .3rem;
 }
 
+.chamado {
+   background-color: #d3fa27;
+}
+
 .tipoNumero {
    align-items: center;
    display: flex;
@@ -27,7 +31,6 @@
 .icone,
 .iconeChamado {
    width: 60px;
-   /* padding-right: .5rem; */
 }
 
 .sala {
@@ -40,6 +43,7 @@
 }
 
 .salaTexto h3 {
+   font-size: 1.1rem !important;
    padding-left: .3rem;
 }
 
